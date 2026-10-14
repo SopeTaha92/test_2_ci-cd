@@ -1,7 +1,7 @@
 
 
 
-name: Build and Push Docker Image
+name: Build_push_test_2_image
 
 on:
   push:
@@ -18,23 +18,23 @@ jobs:
       packages: write
 
     steps:
-      - name: Checkout du code
+      - name: Checkout_code
         uses: actions/checkout@v4
 
-      - name: Connexion à GHCR
+      - name: Connexion_to_GHCR
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extraction des métadonnées (tags, labels)
+      - name: Extracting_metadatas (tags, labels)
         id: meta
         uses: docker/metadata-action@v5
         with:
           images: ghcr.io/${{ github.repository }}
 
-      - name: Build et push de l'image
+      - name: Build_and_push
         uses: docker/build-push-action@v6
         with:
           context: .
